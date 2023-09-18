@@ -31,11 +31,11 @@ urlpatterns = [
          EmployeeAPI.as_view(),
          name='employee_update'
         ),
-    path('api/device_checkout_logs/', 
+    path('api/device_checkout_logs/',
          DeviceCheckoutLogListCreateViewAPI.as_view(),
          name='device_log_create'
         ),
-    path('api/device_checkout_logs/<int:pk>/', 
+    path('api/device_checkout_logs/<int:pk>/',
          DeviceCheckoutLogRetrieveUpdateDestroyViewAPI.as_view(),
          name='device-checkout-log-detail'
         ),
