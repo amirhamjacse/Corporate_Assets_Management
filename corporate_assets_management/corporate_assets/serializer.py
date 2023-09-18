@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import (
-    EmployeeInfo, CompanyInfo, DevicesInfo
+    EmployeeInfo, CompanyInfo, DevicesInfo,
+    DeviceCheckoutLog,
 )
 
 
@@ -22,8 +23,8 @@ class DevicesInfoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    company_name = serializers.ReadOnlyField(
-        source='companyinfo.name'
+    company_name = CompanyInfoSerializer(
+        many=True, read_only=True,
     )
     device_info = DevicesInfoSerializer(
         many=True, read_only=True,
@@ -37,3 +38,17 @@ class EmployeeSerializer(serializers.ModelSerializer):
             'company_name',
             'device_info'
         ]
+
+
+class DeviceCheckoutLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DeviceCheckoutLog
+        fields = '__all__'
+
+
+#Device Log
+class DeviceCheckoutLogGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DeviceCheckoutLog
+        fields = '__all__'
+        depth = 2
